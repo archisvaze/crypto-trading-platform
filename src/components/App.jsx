@@ -1,7 +1,9 @@
-function App(props){
-    return(
+import Header from "./Header";
+
+function App(props) {
+    return (
         <div className="container">
-            <h1>Hi</h1>
+            <Header />
         </div>
     )
 }

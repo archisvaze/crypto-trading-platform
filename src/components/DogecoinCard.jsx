@@ -2,6 +2,7 @@ import React from 'react'
 import img from "../dogecoin.png"
 
 export default function DogecoinCard() {
+    
     let currPrice = 0.511823;
     let prevPrice = 0.322921;
 

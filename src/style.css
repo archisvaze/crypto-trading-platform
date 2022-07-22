@@ -7,9 +7,11 @@
     font-family: 'Poppins', sans-serif;
     color: black;
 }
-button{
+
+button {
     cursor: pointer;
 }
+
 body {}
 
 .container {
@@ -59,7 +61,8 @@ header p {
     gap: 15px;
 }
 
-.crypto-card {
+.crypto-card,
+.transaction-card {
     background-color: white;
     display: flex;
     align-items: center;
@@ -106,9 +109,26 @@ header p {
     color: white;
     font-weight: 600;
 }
-.buy-button{
+
+.buy-button {
     background-color: rgba(0, 216, 0, 0.9);
 }
-.sell-button{
+
+.sell-button {
     background-color: rgba(255, 73, 73, 0.9);
+}
+
+.transaction-card {
+    position: relative;
+    height: 70px;
+    overflow: hidden;
+    margin: 10px;
+}
+
+.left-bar {
+    width: 5px;
+    height: 70px;
+    position: absolute;
+    left: 0;
+    top: 0;
 }

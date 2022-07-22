@@ -5,18 +5,22 @@ export default function DialogBox(props) {
   let dispatch = props.dispatch;
   let data = props.data;
   let walletAmt = props.walletAmt;
-
   let maxBuy = (walletAmt / data.currPrice).toFixed(4);
   let [chargeAmt, setchargeAmt] = useState(0.00);
-  const [disabled, setdisabled] = useState(false)
+  const [disabled, setdisabled] = useState(false);
+  const [buyAmt, setbuyAmt] = useState(0)
 
   function buying(buyAmt) {
-    let charges = (buyAmt * data.currPrice).toFixed(4);
+    walletAmt = Number(props.walletAmt);
+    let charges = 0;
+    setbuyAmt(Number(buyAmt))
+    charges = Number(buyAmt * data.currPrice).toFixed(3);
     if (charges > walletAmt) {
       setdisabled(true)
       setchargeAmt(0)
     }
     else {
+      console.log(charges, walletAmt)
       setdisabled(false)
       setchargeAmt(charges)
     }
@@ -27,15 +31,21 @@ export default function DialogBox(props) {
     <div className='dialogbox'>
       <div className="header">
         <p className='title'>Buy {data.name}</p>
-        <button onClick={() => { dispatch({ type: "close" }); setchargeAmt(0) }} className='close-button'>x</button>
+        <button onClick={() => { dispatch({ type: "close" }); setbuyAmt(0) }} className='close-button'>x</button>
       </div>
       <p className='price'>Current Price: ${data.currPrice}</p>
       <div className="amt-container">
-        <input onChange={(e) => buying(e.target.value)} className='input' type="number" value={chargeAmt} />
-        <p onClick={() => buying(maxBuy)} className='max-price'>Max: {maxBuy}</p>
+
+        <input onChange={(e) => buying(e.target.value)} className='input' type="number" value={buyAmt} />
+
+        <p onClick={() => buying(maxBuy)} className='max-price' >Max: {maxBuy}</p>
+
       </div>
+
       <div className="charge">You will be charged: {chargeAmt}</div>
-      <button onClick={() => { if (chargeAmt > 0) { dispatch({ type: "buycoin", payload: { id: data.name, amount: chargeAmt, price: data.currPrice } }); setchargeAmt(0) } }} style={{ backgroundColor: disabled ? "grey" : "rgba(0, 216, 0, 0.9)" }} disabled={disabled} className='buy-button'>Buy</button>
+
+      <button onClick={() => { if (chargeAmt > 0) { dispatch({ type: "buycoin", payload: { id: data.name, amount: chargeAmt, price: data.currPrice, type: "buy" } }); setbuyAmt(0) } }} style={{ backgroundColor: disabled ? "grey" : "rgba(0, 216, 0, 0.9)" }} disabled={disabled} className='buy-button'>Buy</button>
+
     </div>
   )
 }

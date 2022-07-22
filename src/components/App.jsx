@@ -4,6 +4,7 @@ import Wallet from "./Wallet";
 import { useState, useEffect, useReducer } from "react";
 import CryptoCard from "./CryptoCard";
 import Dialogbox from "./Dialogbox";
+import TransactionCard from "./TransactionCard";
 
 
 function reducer(state, action) {
@@ -16,7 +17,9 @@ function reducer(state, action) {
             console.log(action.payload)
             let walletAmt = Number(Number(state.walletAmt) - Number(action.payload.amount)).toFixed(3);
             let portfolioVal = Number(Number(state.portfolioVal) + Number(action.payload.amount)).toFixed(3);
-            return { ...state, portfolioVal: portfolioVal, walletAmt: walletAmt }
+            let transactions = [action.payload, ...state.transactions]
+
+            return { ...state, portfolioVal: portfolioVal, walletAmt: walletAmt, transactions: transactions }
         default:
             break;
     }
@@ -25,7 +28,7 @@ function reducer(state, action) {
 
 function App(props) {
     let [cryptoArr, setCryptoArr] = useState([]);
-    let initialState = { walletAmt: 1000, holdings: [], transactions: [], portfolioVal: 0, showDialogBox: false, dialogData: {}, currCharge: 0 }
+    let initialState = { walletAmt: 1000, holdings: [], transactions: [{id: 'Dogecoin', amount: '0.275', price: 0.068666, type: 'buy'}], portfolioVal: 0, showDialogBox: false, dialogData: {}, currCharge: 0 }
     let [state, dispatch] = useReducer(reducer, initialState);
 
 
@@ -67,7 +70,13 @@ function App(props) {
                 <div className="holdings-container">
 
                 </div>
-                <div className="transactions-container"></div>
+                <div className="transactions-container">
+                    {state.transactions.map(obj => {
+                        return(
+                        <TransactionCard key={new Date().getTime()} obj={obj} />
+                        )
+                    })}
+                </div>
             </div>
         </div>
     )

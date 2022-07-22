@@ -75,3 +75,40 @@ header p {
     font-weight: 600;
     color: rgb(80, 80, 80);
 }
+
+.dialogbox-container {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 7px;
+}
+
+.dialogbox {
+    border: 2px solid red;
+    height: 300px;
+    width: 300px;
+    background-color: white;
+    box-shadow: 3px 3px 10px 3px hwb(0 0% 100% / 0.256);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-radius: 7px;
+}
+
+.dialogbox .title {
+    background-color: rgb(80, 77, 77);
+    color: whitesmoke;
+    display: flex;
+    justify-content: space-between;
+}
+
+.amt-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.amt-container input {
+    width: 30%;
+}

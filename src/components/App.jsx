@@ -3,6 +3,7 @@ import Portfolio from "./Portfolio";
 import Wallet from "./Wallet";
 import { useState, useEffect, useReducer } from "react";
 import CryptoCard from "./CryptoCard";
+import DialogBox from "./DialogBox";
 
 
 function reducer(state, action) {
@@ -46,8 +47,8 @@ function App(props) {
 
     return (
         <div className="container">
-            <div style={{display: state.showDialogBox ? "flex" : " none"}} className="dialogbox">
-
+            <div style={{display: state.showDialogBox ? "flex" : " none"}} className="dialogbox-container">
+<DialogBox/>
             </div>
             <Header />
             <Wallet />

@@ -11,6 +11,7 @@ We will be making a fully functional trading simulator. You should be able to:
 
 ## Discussion points (Needs to be filled by your team):
 - What are the components you will be creating?
+> sadasd
 - How the information will be flowing in the app?
 - Flow diagram?
 

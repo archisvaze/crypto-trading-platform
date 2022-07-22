@@ -6,6 +6,9 @@ import EthereumCard from "./EthereumCard";
 import DogecoinCard from "./DogecoinCard";
 
 function App(props) {
+    const [bitcoinAmt, setbitcoinAmt] = useState(0);
+    // const [bitcoinAmt, setbitcoinAmt] = useState(0);
+    // const [bitcoinAmt, setbitcoinAmt] = useState(0);
     return (
         <div className="container">
             <Header />

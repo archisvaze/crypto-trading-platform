@@ -16,6 +16,7 @@ We will be making a fully functional trading simulator. You should be able to:
 2. Cryptocoins Cards
 3. Holdings Cards
 4. Transactions Card
+5. "Pop-up" Diaolog Box
 ```
 
 - How the information will be flowing in the app?

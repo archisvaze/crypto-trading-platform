@@ -11,10 +11,10 @@ We will be making a fully functional trading simulator. You should be able to:
 
 ## Discussion points (Needs to be filled by your team):
 - What are the components you will be creating?
-> 1.header > title, wallet, portfolio
-> 2. Cryptocoins Cards
-> 3. Holdings Cards
-> 4. Transactions Cards
+```1.header > title, wallet, portfolio
+2. Cryptocoins Cards
+3. Holdings Cards
+4. Transactions Card```
 
 - How the information will be flowing in the app?
 - Flow diagram?

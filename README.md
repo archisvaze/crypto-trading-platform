@@ -11,8 +11,27 @@ We will be making a fully functional trading simulator. You should be able to:
 
 ## Discussion points (Needs to be filled by your team):
 - What are the components you will be creating?
+```
+1. Header > Title, Wallet, Portfolio
+2. Cryptocoins Cards
+3. Holdings Cards
+4. Transactions Card
+5. "Pop-up" Diaolog Box
+```
+
 - How the information will be flowing in the app?
-- Flow diagram?
+```
+The info will flow using the UseReducer Hook. We will store the default states for holdings, transactions as arrays, and wallet and portolio values as numbers.
+```
+- Flow:
+```
+Step1. Create the Header Components.
+Step2. Generate the Cards Dianamically using fetch API
+Step3. Apply Initial CSS
+Step4. Create the "POP-UP Dialog Box" to show up on buy/sell clicks
+Step5. Add functionalty to buy/sell buy using values from wallet, curr Crypto Price and setting up the logic for the transaction.
+Step6. Dynamically Update Values in Portfolio and Wallet using useReducer Hook and Gernate Transaction Cards by updating the transaction Array in Reducer State.
+```
 
 
 

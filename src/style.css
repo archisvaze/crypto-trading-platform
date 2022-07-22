@@ -26,8 +26,14 @@ header p{
     color: grey;
 }
 #wallet{
-    margin-top: 10px;
+    margin-top: 5px;
     text-align: center;
     font-size: 23px;
     letter-spacing: 2px;
+}
+
+#portfolio{
+    font-weight: 600;
+    font-size: 24px;
+    margin-top: 10px;
 }

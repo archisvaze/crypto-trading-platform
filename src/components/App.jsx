@@ -1,4 +1,5 @@
 import Header from "./Header";
+import Portfolio from "./Portfolio";
 import Wallet from "./Wallet";
 
 function App(props) {
@@ -6,7 +7,7 @@ function App(props) {
         <div className="container">
             <Header />
             <Wallet />
-            
+            <Portfolio />
         </div>
     )
 }

@@ -5,14 +5,23 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    color: black;
 }
+button{
+    cursor: pointer;
+}
+body {}
 
 .container {
+    /* background-image: url(https://source.unsplash.com/1600x900/?crypto); */
+    background-color: rgba(230, 230, 230);
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
 }
 
 header h2 {
@@ -26,7 +35,7 @@ header p {
     margin-top: 5px;
     text-align: center;
     font-size: 16px;
-    color: grey;
+    color: rgb(255, 145, 42);
 }
 
 #wallet {
@@ -51,13 +60,14 @@ header p {
 }
 
 .crypto-card {
+    background-color: white;
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 10px;
     width: 300px;
-    border-radius: 5px;
-    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px 3px rgba(0, 0, 0, 0.2);
 }
 
 .curr-amount {
@@ -71,9 +81,9 @@ header p {
 }
 
 .change {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
-    color: rgb(80, 80, 80);
+    letter-spacing: 1px;
 }
 
 .dialogbox-container {
@@ -81,33 +91,24 @@ header p {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 7px;
 }
 
-.dialogbox {
-    border: 2px solid red;
-    height: 300px;
-    width: 300px;
-    background-color: white;
-    box-shadow: 3px 3px 10px 3px hwb(0 0% 100% / 0.256);
+.buy-button,
+.sell-button {
+    width: 70px;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
     display: flex;
-    flex-direction: column;
-    border-radius: 7px;
-}
-
-.dialogbox .title {
-    background-color: rgb(80, 77, 77);
-    color: whitesmoke;
-    display: flex;
-    justify-content: space-between;
-}
-
-.amt-container {
-    display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    margin: 7.5px;
+    color: white;
+    font-weight: 600;
 }
-
-.amt-container input {
-    width: 30%;
+.buy-button{
+    background-color: rgba(0, 216, 0, 0.9);
+}
+.sell-button{
+    background-color: rgba(255, 73, 73, 0.9);
 }

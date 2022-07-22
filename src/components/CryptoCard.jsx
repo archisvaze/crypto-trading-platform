@@ -10,7 +10,11 @@ export default function CryptoCard(props) {
     let change = obj.price_change_percentage_24h;
     let name = obj.name;
     let dispatch = props.dispatch;
-
+    let payload = {
+        "name": name,
+        "currPrice" : currPrice,
+        "image": image,
+    }
 
     return (
         <div className="crypto-card">
@@ -18,11 +22,11 @@ export default function CryptoCard(props) {
             <div className="crypto-info">
                 <p className="curr-amount">${currPrice}</p>
                 <p className="name">{name}</p>
-                <p className="change">Last 24h: <span style={{ color: change >= 0 ? "green" : "red" }} className='percentage'>{change}%</span></p>
+                <p className="change">Last 24h: <span style={{ color: change >= 0 ? "rgba(0, 216, 0)" : "rgba(255, 73, 73)" }} className='percentage'>{change}%</span></p>
             </div>
             <div className="actions-container">
-                <button onClick={() => { dispatch({ type: "buy", payload: `${name}` });}} className="buy">Buy</button>
-                <button className="sell">Sell</button>
+                <button onClick={() => { dispatch({ type: "buy", payload: payload });}} className="buy-button">Buy</button>
+                <button className="sell-button">Sell</button>
             </div>
         </div>
     )

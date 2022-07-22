@@ -10,10 +10,13 @@ function reducer(state, action) {
     switch (action.type) {
         case "buy":
             if (action.payload === "Bitcoin") {
-                return{ ...state, showDialogBox:true }
+                return { ...state, showDialogBox: true }
             }
-            break;
-
+            else {
+                return { ...state }
+            }
+        case "close":
+            return { ...state, showDialogBox: false }
         default:
             break;
     }
@@ -22,7 +25,7 @@ function reducer(state, action) {
 
 function App(props) {
     let [cryptoArr, setCryptoArr] = useState([]);
-    let initialState = { walletAmt: 0, holdings: [], transactions: [], portfolioVal: 0 , showDialogBox: false}
+    let initialState = { walletAmt: 0, holdings: [], transactions: [], portfolioVal: 0, showDialogBox: false }
     let [state, dispatch] = useReducer(reducer, initialState);
 
 
@@ -47,8 +50,8 @@ function App(props) {
 
     return (
         <div className="container">
-            <div style={{display: state.showDialogBox ? "flex" : " none"}} className="dialogbox-container">
-<DialogBox/>
+            <div style={{ display: state.showDialogBox ? "flex" : " none" }} className="dialogbox-container">
+                <DialogBox dispatch={dispatch} state={state}/>
             </div>
             <Header />
             <Wallet />

@@ -1,21 +1,28 @@
 import Header from "./Header";
 import Portfolio from "./Portfolio";
 import Wallet from "./Wallet";
-import BitcoinCard from "./BitcoinCard";
-import EthereumCard from "./EthereumCard";
-import DogecoinCard from "./DogecoinCard";
 import { useState, useEffect } from "react";
+import CryptoCard from "./CryptoCard";
 
 function App(props) {
-    const [bitcoinPrice, setBitcoinPrice] = useState(0);
-    const [ethereumPrice, setEthereumPrice] = useState(0);
-    const [dogecoinPrice, setDogecoinPrice] = useState(0);
+    let [cryptoArr, setCryptoArr] = useState([]);
+
+    function fetchData() {
+        fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2C%20ethereum%2C%20dogecoin&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=%601h%2C24h%2C7d%60")
+            .then(resp => resp.json())
+            .then(data => {
+                cryptoArr = data;
+                setCryptoArr(cryptoArr);
+                console.log(cryptoArr)
+            })
+    }
     useEffect(() => {
-        fetchData(setBitcoinPrice, setEthereumPrice, setDogecoinPrice);
-        let intervalKey = setInterval(() => {
-            fetchData(setBitcoinPrice, setEthereumPrice, setDogecoinPrice);
-        }, 10000);
-        return () => clearInterval(intervalKey);
+        fetchData();
+        let id = setInterval(() => {
+            fetchData();
+        }, 20000)
+        return () => clearInterval(id);
+        // eslint-disable-next-line
     }, [])
 
     return (
@@ -24,30 +31,16 @@ function App(props) {
             <Wallet />
             <Portfolio />
             <div className="crypto-cards-container">
-                < BitcoinCard newPrice={bitcoinPrice} />
-                < EthereumCard newPrice={ethereumPrice} />
-                < DogecoinCard newPrice={dogecoinPrice} />
+                {cryptoArr.map(obj => {
+                    return (
+                        <CryptoCard key={obj.id} obj={obj} />
+                    )
+                })}
             </div>
         </div>
     )
 }
 
-function fetchData(setBitcoinPrice, setEthereumPrice, setDogecoinPrice) {
-    fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
-        .then(response => response.json())
-        .then(data => {
-            setBitcoinPrice(data.bitcoin.usd);
-        });
-    fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd')
-        .then(response => response.json())
-        .then(data => {
-            setEthereumPrice(data.ethereum.usd);
-        });
-    fetch('https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd')
-        .then(response => response.json())
-        .then(data => {
-            setDogecoinPrice(data.dogecoin.usd);
-        });
-}
+
 
 export default App;

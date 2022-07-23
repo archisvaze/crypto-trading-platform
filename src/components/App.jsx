@@ -65,25 +65,29 @@ function reducer(state, action) {
 
 
 function App(props) {
-    // let initialState = {
+    let initialState = {}
+    if (localStorage.getItem("crypto-state") === null) {
+        initialState = {
 
-    //     cryptoArr: [],
+            cryptoArr: [],
 
-    //     walletAmt: 1000000,
+            walletAmt: 1000000,
 
-    //     holdings: [{ id: 'Bitcoin', totalAmount: 0, totalCharged: 0, currVal: 0, profit: 0 }, { id: 'Ethereum', totalAmount: 0, totalCharged: 0, currVal: 0, profit: 0 }, { id: 'Dogecoin', totalAmount: 0, totalCharged: 0, currVal: 0, profit: 0 }],
+            holdings: [{ id: 'Bitcoin', totalAmount: 0, totalCharged: 0, currVal: 0, profit: 0 }, { id: 'Ethereum', totalAmount: 0, totalCharged: 0, currVal: 0, profit: 0 }, { id: 'Dogecoin', totalAmount: 0, totalCharged: 0, currVal: 0, profit: 0 }],
 
-    //     transactions: [],
+            transactions: [],
 
-    //     portfolioVal: 0,
+            portfolioVal: 0,
 
-    //     showDialogBox: false,
+            showDialogBox: false,
 
-    //     dialogData: {},
+            dialogData: {},
 
-    //     currCharge: 0
-    // }
-    let initialState = JSON.parse(localStorage.getItem("crypto-state"))
+            currCharge: 0
+        }
+    } else {
+        initialState = JSON.parse(localStorage.getItem("crypto-state"))
+    }
     let [state, dispatch] = useReducer(reducer, initialState);
 
 

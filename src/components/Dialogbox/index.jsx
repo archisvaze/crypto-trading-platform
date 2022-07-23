@@ -27,6 +27,14 @@ export default function DialogBox(props) {
     if (buyAmt === undefined) setchargeAmt(0);
   }
 
+//get formatted date:
+function getFormattedDate() {
+  var date = new Date();
+  var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
+  return str;
+}
+
   return (
     <div className='dialogbox'>
       <div className="header">
@@ -44,7 +52,7 @@ export default function DialogBox(props) {
 
       <div className="charge">You will be charged: {chargeAmt}</div>
 
-      <button onClick={() => { if (chargeAmt > 0) { dispatch({ type: "buycoin", payload: { id: data.name, amount: chargeAmt, price: data.currPrice, type: "buy" } }); setbuyAmt(0) } }} style={{ backgroundColor: disabled ? "grey" : "rgba(0, 216, 0, 0.9)" }} disabled={disabled} className='buy-button'>Buy</button>
+      <button onClick={() => { if (chargeAmt > 0) { dispatch({ type: "buycoin", payload: { id: data.name, charged: chargeAmt, price: data.currPrice, amount: buyAmt, time: getFormattedDate(), type: "buy" } }); setbuyAmt(0) } }} style={{ backgroundColor: disabled ? "grey" : "rgba(0, 216, 0, 0.9)" }} disabled={disabled} className='buy-button'>Buy</button>
 
     </div>
   )

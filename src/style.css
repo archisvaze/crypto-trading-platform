@@ -90,6 +90,7 @@ header p {
 }
 
 .dialogbox-container {
+    z-index: 100;
     position: fixed;
     left: 50%;
     top: 50%;
@@ -111,24 +112,45 @@ header p {
 }
 
 .buy-button {
-    background-color: rgba(0, 216, 0, 0.9);
+    background-color: rgba(126, 126, 126, 0.9);
 }
 
 .sell-button {
-    background-color: rgba(255, 73, 73, 0.9);
+    background-color: rgba(0, 216, 0, 0.9);
+}
+
+.transactions-container h3 {
+    margin: 30px 0;
+    text-align: center;
 }
 
 .transaction-card {
     position: relative;
-    height: 70px;
     overflow: hidden;
     margin: 10px;
+    padding: 10px 20px;
 }
 
 .left-bar {
-    width: 5px;
-    height: 70px;
+    width: 7px;
+    height: 100%;
     position: absolute;
     left: 0;
     top: 0;
+}
+
+.tc-1 {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.tc-2 {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: 600;
+}
+
+.tc-3 {
+    font-size: 13px;
+    font-weight: 600;
 }

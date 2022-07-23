@@ -28,7 +28,23 @@ function reducer(state, action) {
 
 function App(props) {
     let [cryptoArr, setCryptoArr] = useState([]);
-    let initialState = { walletAmt: 1000, holdings: [], transactions: [{id: 'Dogecoin', amount: '0.275', price: 0.068666, type: 'buy'}], portfolioVal: 0, showDialogBox: false, dialogData: {}, currCharge: 0 }
+    let initialState = {
+
+        walletAmt: 1000,
+
+        holdings: [],
+
+        transactions: [{ id: 'Dogecoin', charged: '0.068', price: 0.068292, amount: 1, time: '2022-7-23 8:57:42', type: "buy" }],
+
+        portfolioVal: 0, 
+        
+        showDialogBox: false, 
+        
+        dialogData: {}, 
+        
+        currCharge: 0
+    }
+
     let [state, dispatch] = useReducer(reducer, initialState);
 
 
@@ -39,7 +55,6 @@ function App(props) {
             .then(data => {
                 cryptoArr = data;
                 setCryptoArr(cryptoArr);
-                console.log(cryptoArr)
             })
     }
     useEffect(() => {
@@ -71,9 +86,11 @@ function App(props) {
 
                 </div>
                 <div className="transactions-container">
+                    <h3>Transactions</h3>
                     {state.transactions.map(obj => {
-                        return(
-                        <TransactionCard key={new Date().getTime()} obj={obj} />
+                        console.log(state.transactions)
+                        return (
+                            <TransactionCard key={obj.time} obj={obj} />
                         )
                     })}
                 </div>

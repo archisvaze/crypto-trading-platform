@@ -118,6 +118,13 @@ header p {
     background-color: rgba(0, 216, 0, 0.9);
 }
 
+.bottom-container {
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 .bottom-container h3 {
     margin: 30px 0;
     text-align: center;
@@ -181,7 +188,7 @@ header p {
     color: rgba(0, 0, 0, 0.6);
 }
 
-.hc-4{
+.hc-4 {
     margin: 5px 0;
     font-size: 14px;
     font-weight: 600;

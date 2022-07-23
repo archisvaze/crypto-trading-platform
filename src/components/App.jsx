@@ -56,7 +56,6 @@ function reducer(state, action) {
                 portfolioValClone = Number(portfolioValClone).toFixed(3)
 
             }
-            localStorage.setItem("crypto-state", JSON.stringify(state))
             return { ...state, holdings: holdingsClone2, portfolioVal: portfolioValClone }
         default:
             break;
@@ -112,7 +111,9 @@ function App(props) {
         //eslint-disable-next-line
     }, [])
 
-
+    useEffect(() => {
+        localStorage.setItem("crypto-state", JSON.stringify(state))
+    }, [state])
 
 
     return (

@@ -61,8 +61,7 @@ header p {
     gap: 15px;
 }
 
-.crypto-card,
-.transaction-card {
+.crypto-card {
     background-color: white;
     display: flex;
     align-items: center;
@@ -119,7 +118,7 @@ header p {
     background-color: rgba(0, 216, 0, 0.9);
 }
 
-.transactions-container h3 {
+.bottom-container h3 {
     margin: 30px 0;
     text-align: center;
 }
@@ -127,8 +126,15 @@ header p {
 .transaction-card {
     position: relative;
     overflow: hidden;
+    background-color: white;
+    display: flex;
+    align-items: center;
     margin: 10px;
+    gap: 10px;
     padding: 10px 20px;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px 3px rgba(0, 0, 0, 0.2);
 }
 
 .left-bar {
@@ -139,9 +145,11 @@ header p {
     top: 0;
 }
 
-.tc-1 {
+.tc-1,
+.hc-1 {
     font-weight: 600;
     font-size: 16px;
+    margin-bottom: 5px;
 }
 
 .tc-2 {
@@ -152,5 +160,29 @@ header p {
 
 .tc-3 {
     font-size: 13px;
+    font-weight: 600;
+}
+
+.holding-card {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px 20px;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px 3px rgba(0, 0, 0, 0.2);
+}
+
+.hc-2,
+.hc-3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.hc-4{
+    margin: 5px 0;
+    font-size: 14px;
     font-weight: 600;
 }

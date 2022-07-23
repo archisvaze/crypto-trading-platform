@@ -15,8 +15,8 @@ function reducer(state, action) {
             return { ...state, showDialogBox: false }
         case "buycoin":
             console.log(action.payload)
-            let walletAmt = Number(Number(state.walletAmt) - Number(action.payload.amount)).toFixed(3);
-            let portfolioVal = Number(Number(state.portfolioVal) + Number(action.payload.amount)).toFixed(3);
+            let walletAmt = (Number(state.walletAmt) - Number(action.payload.charged)).toFixed(3);
+            let portfolioVal = (Number(state.portfolioVal) + Number(action.payload.charged)).toFixed(3);
             let transactions = [action.payload, ...state.transactions]
 
             return { ...state, portfolioVal: portfolioVal, walletAmt: walletAmt, transactions: transactions }
@@ -30,18 +30,18 @@ function App(props) {
     let [cryptoArr, setCryptoArr] = useState([]);
     let initialState = {
 
-        walletAmt: 1000,
+        walletAmt: 100,
 
         holdings: [],
 
         transactions: [{ id: 'Dogecoin', charged: '0.068', price: 0.068292, amount: 1, time: '2022-7-23 8:57:42', type: "buy" }],
 
-        portfolioVal: 0, 
-        
-        showDialogBox: false, 
-        
-        dialogData: {}, 
-        
+        portfolioVal: 0,
+
+        showDialogBox: false,
+
+        dialogData: {},
+
         currCharge: 0
     }
 
@@ -88,7 +88,6 @@ function App(props) {
                 <div className="transactions-container">
                     <h3>Transactions</h3>
                     {state.transactions.map(obj => {
-                        console.log(state.transactions)
                         return (
                             <TransactionCard key={obj.time} obj={obj} />
                         )

@@ -20,7 +20,6 @@ export default function DialogBox(props) {
       setchargeAmt(0)
     }
     else {
-      console.log(charges, walletAmt)
       setdisabled(false)
       setchargeAmt(charges)
     }

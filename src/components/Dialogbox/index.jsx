@@ -16,7 +16,6 @@ export default function DialogBox(props) {
     setbuyAmt(Number(buyAmt))
     charges = Number(buyAmt * data.currPrice)
     if (charges > walletAmt) {
-      console.log(charges, walletAmt)
       setdisabled(true)
       setchargeAmt(0)
     }

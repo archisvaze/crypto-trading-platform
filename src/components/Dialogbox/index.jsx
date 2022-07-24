@@ -4,8 +4,8 @@ import "./style.css"
 export default function DialogBox(props) {
   let dispatch = props.dispatch;
   let data = props.data;
-  let walletAmt = props.walletAmt;
-  let maxBuy = (walletAmt / data.currPrice).toFixed(4);
+  let walletAmt = Number(props.walletAmt);
+  let maxBuy = (walletAmt / data.currPrice);
   let [chargeAmt, setchargeAmt] = useState(0.00);
   const [disabled, setdisabled] = useState(false);
   const [buyAmt, setbuyAmt] = useState(0)
@@ -14,13 +14,13 @@ export default function DialogBox(props) {
     walletAmt = Number(props.walletAmt);
     let charges = 0;
     setbuyAmt(Number(buyAmt))
-    if (charges > walletAmt || charges <= 0) {
+    charges = Number(buyAmt * data.currPrice).toFixed(3);
+    if (charges > walletAmt) {
       setdisabled(true)
       setchargeAmt(0)
-      setbuyAmt(0)
     }
     else {
-      charges = Number(buyAmt * data.currPrice).toFixed(3);
+      setbuyAmt(Number(buyAmt).toFixed(3))
       setdisabled(false)
       setchargeAmt(Number(charges))
     }
@@ -39,7 +39,7 @@ export default function DialogBox(props) {
     <div className='dialogbox'>
       <div className="header">
         <p className='title'>Buy {data.name}</p>
-        <button onClick={() => { dispatch({ type: "close" }); setbuyAmt(0) }} className='close-button'>x</button>
+        <button onClick={() => { dispatch({ type: "close" }); setbuyAmt(0); setchargeAmt(0) }} className='close-button'>x</button>
       </div>
       <p className='price'>Current Price: ${data.currPrice}</p>
       <div className="amt-container">
@@ -63,7 +63,7 @@ export default function DialogBox(props) {
               time: getFormattedDate(),
               type: "buy"
             }
-          }); setbuyAmt(0)
+          }); setbuyAmt(0); setchargeAmt(0)
         }
       }} style={{ backgroundColor: disabled ? "grey" : "rgba(0, 216, 0, 0.9)" }} disabled={disabled} className='buy-button'>Buy</button>
 

@@ -5,8 +5,6 @@ export default function DialogBox2(props) {
 
     let dispatch = props.dispatch;
     let data = props.data;
-    let walletAmt = props.walletAmt;
-    let portfolioVal = props.portfolioVal;
     const [creditAmt, setcreditAmt] = useState(0);
     const [disabled, setdisabled] = useState(false);
     let [sellAmt, setsellAmt] = useState(0);
@@ -25,12 +23,11 @@ export default function DialogBox2(props) {
 
 
     function selling(sellAmt) {
-        walletAmt = Number(props.walletAmt);
+
         let creditAmt = 0;
         setsellAmt(sellAmt)
-        if (sellAmt > holdingAmt || sellAmt <= 0) {
+        if (sellAmt > holdingAmt ||sellAmt<=0) {
             setdisabled(true)
-            setsellAmt(0)
             setcreditAmt(0)
         } else {
             creditAmt = Number(sellAmt * data.currPrice).toFixed(3);
@@ -51,7 +48,7 @@ export default function DialogBox2(props) {
         <div className='dialogbox2'>
             <div className="header">
                 <p className='title'>Sell {data.name}</p>
-                <button onClick={() => { dispatch({ type: "close" }); setsellAmt(0) }} className='close-button'>x</button>
+                <button onClick={() => { dispatch({ type: "close" }); setsellAmt(0);  setcreditAmt(0) }} className='close-button'>x</button>
             </div>
             <p className='price'>Current Price: {data.currPrice}</p>
             <div className="amt-container">
@@ -62,7 +59,7 @@ export default function DialogBox2(props) {
 
             </div>
 
-            <div className="charge">You will be credited:</div>
+            <div className="charge">You will be credited: {creditAmt}</div>
 
             <button onClick={() => {
                 dispatch({
@@ -74,7 +71,7 @@ export default function DialogBox2(props) {
                         time: getFormattedDate(),
                         type: "sell"
                     }
-                }); setsellAmt(0);
+                }); setsellAmt(0);  setcreditAmt(0);
 
             }} style={{ backgroundColor: disabled ? "grey" : "rgba(0, 216, 0, 0.9)" }} disabled={disabled} className='sell-button'>Sell</button>
 

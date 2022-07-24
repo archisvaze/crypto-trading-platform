@@ -69,14 +69,20 @@ function reducer(state, action) {
                 for (let obj of state.cryptoArr) {
                     if (obj.name === holdingsClone2[i].id) {
                         currPrice = Number(obj.current_price);
+                        if (holdingsClone2[i].totalAmount === "0.000" || holdingsClone2[i].totalAmount == 0) {
+                            currPrice = 0;
+                        }
                     }
                 }
+                console.log(currPrice)
                 let currVal = (Number(currPrice) * Number(holdingsClone2[i].totalAmount)).toFixed(3);
                 let profit = (Number(currVal) - Number(holdingsClone2[i].totalCharged)).toFixed(3);
                 holdingsClone2[i].currVal = Number(currVal);
                 holdingsClone2[i].profit = Number(profit);
                 portfolioValClone = Number(portfolioValClone) + Number(profit);
+                if (portfolioValClone <= 0) portfolioValClone = 0;
                 portfolioValClone = Number(portfolioValClone).toFixed(3)
+
 
             }
             return { ...state, holdings: holdingsClone2, portfolioVal: portfolioValClone }

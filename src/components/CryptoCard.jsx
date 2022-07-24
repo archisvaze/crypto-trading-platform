@@ -26,7 +26,7 @@ export default function CryptoCard(props) {
             </div>
             <div className="actions-container">
                 <button onClick={() => { dispatch({ type: "buy", payload: payload });}} className="buy-button">Buy</button>
-                <button className="sell-button">Sell</button>
+                <button onClick={() => {dispatch({type: "sell", payload: payload})}} className="sell-button">Sell</button>
             </div>
         </div>
     )

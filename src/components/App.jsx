@@ -6,6 +6,7 @@ import CryptoCard from "./CryptoCard";
 import Dialogbox from "./Dialogbox";
 import TransactionCard from "./TransactionCard";
 import HoldingCard from "./HoldingCard";
+import DialogBox2 from "./Dialogbox2";
 
 
 
@@ -18,8 +19,10 @@ function reducer(state, action) {
             return { ...state, cryptoArr: action.payload }
         case "buy":
             return { ...state, showDialogBox: true, dialogData: action.payload }
+        case "sell":
+            return { ...state, showDialogBox2: true, dialogData: action.payload }
         case "close":
-            return { ...state, showDialogBox: false }
+            return { ...state, showDialogBox: false, showDialogBox2: false }
         case "buycoin":
             console.log(action.payload)
             let walletAmt = (Number(state.walletAmt) - Number(action.payload.charged)).toFixed(3);
@@ -38,6 +41,26 @@ function reducer(state, action) {
             }
             return { ...state, portfolioVal: portfolioVal, walletAmt: walletAmt, transactions: transactions, holdings: holdingsClone, showDialogBox: false };
 
+        case "sellcoin":
+            console.log(action.payload);
+
+            console.log(action.payload)
+            let walletAmt2 = (Number(state.walletAmt) + Number(action.payload.charged)).toFixed(3);
+            let portfolioVal2 = (Number(state.portfolioVal) - Number(action.payload.charged)).toFixed(3);
+            let transactions2 = [action.payload, ...state.transactions]
+
+            //update holdings
+            let holdingsClone3 = JSON.parse(JSON.stringify(state.holdings));
+            for (let obj of holdingsClone3) {
+                if (obj.id === action.payload.id) { //matching holding with transaction
+                    obj.totalAmount = Number(obj.totalAmount) - Number(action.payload.amount);
+                    obj.totalCharged = Number(obj.totalCharged) - Number(action.payload.charged);
+                    obj.totalAmount = Number(obj.totalAmount).toFixed(3)
+                    obj.totalCharged = Number(obj.totalCharged).toFixed(3)
+                }
+            }
+            return { ...state, portfolioVal: portfolioVal2, walletAmt: walletAmt2, transactions: transactions2, holdings: holdingsClone3, showDialogBox: false };
+
         case "update":
             let portfolioValClone = state.portfolioVal;
             let holdingsClone2 = JSON.parse(JSON.stringify(state.holdings))
@@ -45,13 +68,13 @@ function reducer(state, action) {
                 let currPrice = 0;
                 for (let obj of state.cryptoArr) {
                     if (obj.name === holdingsClone2[i].id) {
-                        currPrice = obj.current_price;
+                        currPrice = Number(obj.current_price);
                     }
                 }
                 let currVal = (Number(currPrice) * Number(holdingsClone2[i].totalAmount)).toFixed(3);
-                let profit = ((currVal) - Number(holdingsClone2[i].totalCharged)).toFixed(3);
-                holdingsClone2[i].currVal = currVal;
-                holdingsClone2[i].profit = profit;
+                let profit = (Number(currVal) - Number(holdingsClone2[i].totalCharged)).toFixed(3);
+                holdingsClone2[i].currVal = Number(currVal);
+                holdingsClone2[i].profit = Number(profit);
                 portfolioValClone = Number(portfolioValClone) + Number(profit);
                 portfolioValClone = Number(portfolioValClone).toFixed(3)
 
@@ -79,6 +102,7 @@ function App(props) {
             portfolioVal: 0,
 
             showDialogBox: false,
+            showDialogBox2: false,
 
             dialogData: {},
 
@@ -88,7 +112,6 @@ function App(props) {
         initialState = JSON.parse(localStorage.getItem("crypto-state"))
     }
     let [state, dispatch] = useReducer(reducer, initialState);
-
 
 
     function fetchData() {
@@ -120,6 +143,9 @@ function App(props) {
         <div className="container">
             <div style={{ display: state.showDialogBox ? "flex" : " none" }} className="dialogbox-container">
                 <Dialogbox dispatch={dispatch} data={state.dialogData} walletAmt={state.walletAmt} />
+            </div>
+            <div style={{ display: state.showDialogBox2 ? "flex" : " none" }} className="dialogbox2-container">
+                <DialogBox2 dispatch={dispatch} data={state.dialogData} walletAmt={state.walletAmt} portfolioVal={state.portfolioVal} holdings={state.holdings} />
             </div>
             <Header />
             <Wallet walletAmt={state.walletAmt} />

@@ -6,8 +6,8 @@ export default function CryptoCard(props) {
     //declaring variables
     let obj = props.obj;
     let image = obj.image;
-    let currPrice = obj.current_price;
-    let change = obj.price_change_percentage_24h;
+    let currPrice = Number(obj.current_price).toFixed(3);
+    let change = Number(obj.price_change_percentage_24h).toFixed(3);
     let name = obj.name;
     let dispatch = props.dispatch;
     let payload = {

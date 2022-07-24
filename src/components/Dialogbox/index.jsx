@@ -5,8 +5,8 @@ export default function DialogBox(props) {
   let dispatch = props.dispatch;
   let data = props.data;
   let walletAmt = Number(props.walletAmt);
-  let maxBuy = (walletAmt / data.currPrice);
-  let [chargeAmt, setchargeAmt] = useState(0.00);
+  let maxBuy = (walletAmt / data.currPrice)
+  let [chargeAmt, setchargeAmt] = useState(0);
   const [disabled, setdisabled] = useState(false);
   const [buyAmt, setbuyAmt] = useState(0)
 
@@ -14,13 +14,14 @@ export default function DialogBox(props) {
     walletAmt = Number(props.walletAmt);
     let charges = 0;
     setbuyAmt(Number(buyAmt))
-    charges = Number(buyAmt * data.currPrice).toFixed(3);
+    charges = Number(buyAmt * data.currPrice)
     if (charges > walletAmt) {
+      console.log(charges, walletAmt)
       setdisabled(true)
       setchargeAmt(0)
     }
     else {
-      setbuyAmt(Number(buyAmt).toFixed(3))
+      setbuyAmt(Number(buyAmt))
       setdisabled(false)
       setchargeAmt(Number(charges))
     }

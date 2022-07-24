@@ -30,7 +30,7 @@ export default function DialogBox2(props) {
             setdisabled(true)
             setcreditAmt(0)
         } else {
-            creditAmt = Number(sellAmt * data.currPrice).toFixed(3);
+            creditAmt = Number(sellAmt * data.currPrice);
             setdisabled(false);
             setcreditAmt(Number(creditAmt))
         }

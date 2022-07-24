@@ -24,9 +24,8 @@ function reducer(state, action) {
         case "close":
             return { ...state, showDialogBox: false, showDialogBox2: false }
         case "buycoin":
-            console.log(action.payload)
-            let walletAmt = (Number(state.walletAmt) - Number(action.payload.charged)).toFixed(3);
-            let portfolioVal = (Number(state.portfolioVal) + Number(action.payload.charged)).toFixed(3);
+            let walletAmt = (Number(state.walletAmt) - Number(action.payload.charged));
+            let portfolioVal = (Number(state.portfolioVal) + Number(action.payload.charged));
             let transactions = [action.payload, ...state.transactions]
 
             //add to holdings
@@ -35,18 +34,15 @@ function reducer(state, action) {
                 if (obj.id === action.payload.id) { //matching holding with transaction
                     obj.totalAmount = Number(obj.totalAmount) + Number(action.payload.amount);
                     obj.totalCharged = Number(obj.totalCharged) + Number(action.payload.charged);
-                    obj.totalAmount = Number(obj.totalAmount).toFixed(3)
-                    obj.totalCharged = Number(obj.totalCharged).toFixed(3)
+                    obj.totalAmount = Number(obj.totalAmount)
+                    obj.totalCharged = Number(obj.totalCharged)
                 }
             }
             return { ...state, portfolioVal: portfolioVal, walletAmt: walletAmt, transactions: transactions, holdings: holdingsClone, showDialogBox: false };
 
         case "sellcoin":
-            console.log(action.payload);
-
-            console.log(action.payload)
-            let walletAmt2 = (Number(state.walletAmt) + Number(action.payload.charged)).toFixed(3);
-            let portfolioVal2 = (Number(state.portfolioVal) - Number(action.payload.charged)).toFixed(3);
+            let walletAmt2 = (Number(state.walletAmt) + Number(action.payload.charged));
+            let portfolioVal2 = (Number(state.portfolioVal) - Number(action.payload.charged));
             let transactions2 = [action.payload, ...state.transactions]
 
             //update holdings
@@ -55,35 +51,36 @@ function reducer(state, action) {
                 if (obj.id === action.payload.id) { //matching holding with transaction
                     obj.totalAmount = Number(obj.totalAmount) - Number(action.payload.amount);
                     obj.totalCharged = Number(obj.totalCharged) - Number(action.payload.charged);
-                    obj.totalAmount = Number(obj.totalAmount).toFixed(3)
-                    obj.totalCharged = Number(obj.totalCharged).toFixed(3)
+                    obj.totalAmount = Number(obj.totalAmount)
+                    obj.totalCharged = Number(obj.totalCharged)
                 }
             }
             return { ...state, portfolioVal: portfolioVal2, walletAmt: walletAmt2, transactions: transactions2, holdings: holdingsClone3, showDialogBox: false };
 
         case "update":
-            let portfolioValClone = state.portfolioVal;
+            let portfolioValClone = Number(state.portfolioVal);
             let holdingsClone2 = JSON.parse(JSON.stringify(state.holdings))
-            for (let i = 0; i < holdingsClone2.length; i++) {
-                let currPrice = 0;
-                for (let obj of state.cryptoArr) {
-                    if (obj.name === holdingsClone2[i].id) {
-                        currPrice = Number(obj.current_price);
-                        if (holdingsClone2[i].totalAmount === "0.000" || holdingsClone2[i].totalAmount == 0) {
-                            currPrice = 0;
+            
+            if (portfolioValClone > 0) {
+                let holdingsClone2 = JSON.parse(JSON.stringify(state.holdings))
+                for (let i = 0; i < holdingsClone2.length; i++) {
+                    let currPrice = 0;
+                    for (let obj of state.cryptoArr) {
+                        if (obj.name === holdingsClone2[i].id) {
+                            currPrice = Number(obj.current_price)
                         }
                     }
+                    let currVal = (Number(currPrice) * Number(holdingsClone2[i].totalAmount))
+                    holdingsClone2[i].currVal = Number(currVal);
+
+                    if (holdingsClone2[i].totalAmount > 0 && holdingsClone2[i].totalAmount != "0.000") {
+                        let profit = (Number(currVal) - Number(holdingsClone2[i].totalCharged))
+                        holdingsClone2[i].profit = Number(profit);
+                        portfolioValClone = Number(portfolioValClone) + Number(profit);
+                        if (portfolioValClone <= 0) portfolioValClone = 0;
+                        portfolioValClone = Number(portfolioValClone)
+                    }
                 }
-                console.log(currPrice)
-                let currVal = (Number(currPrice) * Number(holdingsClone2[i].totalAmount)).toFixed(3);
-                let profit = (Number(currVal) - Number(holdingsClone2[i].totalCharged)).toFixed(3);
-                holdingsClone2[i].currVal = Number(currVal);
-                holdingsClone2[i].profit = Number(profit);
-                portfolioValClone = Number(portfolioValClone) + Number(profit);
-                if (portfolioValClone <= 0) portfolioValClone = 0;
-                portfolioValClone = Number(portfolioValClone).toFixed(3)
-
-
             }
             return { ...state, holdings: holdingsClone2, portfolioVal: portfolioValClone }
         default:
@@ -127,8 +124,6 @@ function App(props) {
                 let cryptoArr = data;
                 dispatch({ type: "fetchData", payload: cryptoArr });
                 dispatch({ type: "update" })
-                console.log(localStorage)
-
             })
     }
     useEffect(() => {

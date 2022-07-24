@@ -11,11 +11,12 @@ export default function DialogBox(props) {
   const [buyAmt, setbuyAmt] = useState(0)
 
   function buying(buyAmt) {
+    setdisabled(true)
     walletAmt = Number(props.walletAmt);
     let charges = 0;
     setbuyAmt(Number(buyAmt))
     charges = Number(buyAmt * data.currPrice)
-    if (charges > walletAmt || charges < 0) {
+    if (charges > walletAmt || charges <= 0) {
       setdisabled(true)
       setchargeAmt(0)
     }
@@ -25,6 +26,7 @@ export default function DialogBox(props) {
       setchargeAmt(Number(charges))
     }
     if (buyAmt === undefined) setchargeAmt(0);
+
   }
 
   //get formatted date:

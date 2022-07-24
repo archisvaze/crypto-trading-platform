@@ -23,7 +23,7 @@ export default function DialogBox2(props) {
 
 
     function selling(sellAmt) {
-
+        setdisabled(true)
         let creditAmt = 0;
         setsellAmt(sellAmt)
         if (sellAmt > holdingAmt || sellAmt <= 0) {

@@ -14,14 +14,15 @@ export default function DialogBox(props) {
     walletAmt = Number(props.walletAmt);
     let charges = 0;
     setbuyAmt(Number(buyAmt))
-    charges = Number(buyAmt * data.currPrice).toFixed(3);
     if (charges > walletAmt || charges <= 0) {
       setdisabled(true)
       setchargeAmt(0)
+      setbuyAmt(0)
     }
     else {
+      charges = Number(buyAmt * data.currPrice).toFixed(3);
       setdisabled(false)
-      setchargeAmt(charges)
+      setchargeAmt(Number(charges))
     }
     if (buyAmt === undefined) setchargeAmt(0);
   }

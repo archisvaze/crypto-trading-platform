@@ -15,7 +15,7 @@ export default function DialogBox(props) {
     let charges = 0;
     setbuyAmt(Number(buyAmt))
     charges = Number(buyAmt * data.currPrice).toFixed(3);
-    if (charges > walletAmt) {
+    if (charges > walletAmt || charges <= 0) {
       setdisabled(true)
       setchargeAmt(0)
     }

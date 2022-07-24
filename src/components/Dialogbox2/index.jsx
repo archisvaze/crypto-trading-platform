@@ -28,7 +28,7 @@ export default function DialogBox2(props) {
         walletAmt = Number(props.walletAmt);
         let creditAmt = 0;
         setsellAmt(sellAmt)
-        if (sellAmt > holdingAmt || sellAmt < 0) {
+        if (sellAmt > holdingAmt || sellAmt <= 0) {
             setdisabled(true)
             setsellAmt(0)
             setcreditAmt(0)
@@ -76,7 +76,7 @@ export default function DialogBox2(props) {
                     }
                 }); setsellAmt(0);
 
-            }} className='sell-button'>Sell</button>
+            }} style={{ backgroundColor: disabled ? "grey" : "rgba(0, 216, 0, 0.9)" }} disabled={disabled} className='sell-button'>Sell</button>
 
         </div>
     )

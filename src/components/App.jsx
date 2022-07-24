@@ -61,8 +61,9 @@ function reducer(state, action) {
         case "update":
             let portfolioValClone = Number(state.portfolioVal);
             let holdingsClone2 = JSON.parse(JSON.stringify(state.holdings))
+
             if (portfolioValClone > 0) {
-                
+                let holdingsClone2 = JSON.parse(JSON.stringify(state.holdings))
                 for (let i = 0; i < holdingsClone2.length; i++) {
                     let currPrice = 0;
                     for (let obj of state.cryptoArr) {
@@ -84,7 +85,7 @@ function reducer(state, action) {
                     }
                 }
             }
-            
+            else return { ...state, holdings: holdingsClone2, portfolioVal: portfolioValClone }
         default:
             break;
     }

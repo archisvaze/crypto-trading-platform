@@ -6,7 +6,7 @@ export default function DialogBox2(props) {
     let dispatch = props.dispatch;
     let data = props.data;
     const [creditAmt, setcreditAmt] = useState(0);
-    const [disabled, setdisabled] = useState(false);
+    const [disabled, setdisabled] = useState(true);
     let [sellAmt, setsellAmt] = useState(0);
 
 
@@ -26,7 +26,7 @@ export default function DialogBox2(props) {
 
         let creditAmt = 0;
         setsellAmt(sellAmt)
-        if (sellAmt > holdingAmt ||sellAmt<=0) {
+        if (sellAmt > holdingAmt || sellAmt <= 0) {
             setdisabled(true)
             setcreditAmt(0)
         } else {
@@ -48,7 +48,7 @@ export default function DialogBox2(props) {
         <div className='dialogbox2'>
             <div className="header">
                 <p className='title'>Sell {data.name}</p>
-                <button onClick={() => { dispatch({ type: "close" }); setsellAmt(0);  setcreditAmt(0) }} className='close-button'>x</button>
+                <button onClick={() => { dispatch({ type: "close" }); setsellAmt(0); setcreditAmt(0) }} className='close-button'>x</button>
             </div>
             <p className='price'>Current Price: {data.currPrice}</p>
             <div className="amt-container">
@@ -71,7 +71,7 @@ export default function DialogBox2(props) {
                         time: getFormattedDate(),
                         type: "sell"
                     }
-                }); setsellAmt(0);  setcreditAmt(0);
+                }); setsellAmt(0); setcreditAmt(0);
 
             }} style={{ backgroundColor: disabled ? "grey" : "rgba(0, 216, 0, 0.9)" }} disabled={disabled} className='sell-button'>Sell</button>
 

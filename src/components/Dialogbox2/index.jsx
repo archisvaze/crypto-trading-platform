@@ -49,7 +49,7 @@ export default function DialogBox2(props) {
         <div className='dialogbox2'>
             <div className="header">
                 <p className='title'>Sell {data.name}</p>
-                <button onClick={() => { dispatch({ type: "close" }); setsellAmt(0); setcreditAmt(0) }} className='close-button'>x</button>
+                <button onClick={() => { dispatch({ type: "close" }); setsellAmt(0); setcreditAmt(0); setdisabled(true); }} className='close-button'>x</button>
             </div>
             <p className='price'>Current Price: {data.currPrice}</p>
             <div className="amt-container">
@@ -74,7 +74,7 @@ export default function DialogBox2(props) {
                             time: getFormattedDate(),
                             type: "sell"
                         }
-                    }); setsellAmt(0); setcreditAmt(0);
+                    }); setsellAmt(0); setcreditAmt(0); setdisabled(true);
                 }, 1000)
 
 

@@ -60,7 +60,7 @@ function reducer(state, action) {
             return { ...state, portfolioVal: portfolioVal2, walletAmt: walletAmt2, transactions: transactions2, holdings: holdingsClone3, showDialogBox: false };
 
         case "update":
-            let portfolioValClone = Number(state.portfolioVal);
+            let portfolioValClone = 0;
             let holdingsClone2 = JSON.parse(JSON.stringify(state.holdings))
             if (portfolioValClone >= 0) {
                 for (let i = 0; i < holdingsClone2.length; i++) {
@@ -74,12 +74,9 @@ function reducer(state, action) {
                     holdingsClone2[i].currVal = Number(currVal);
 
                     if (holdingsClone2[i].totalAmount > 0 && holdingsClone2[i].totalAmount != "0.000") {
-
+                        portfolioValClone += currVal;
                         let profit = (Number(currVal) - Number(holdingsClone2[i].totalCharged))
                         holdingsClone2[i].profit = Number(profit);
-                        portfolioValClone = Number(portfolioValClone) + Number(profit);
-                        if (portfolioValClone <= 0) portfolioValClone = 0;
-                        portfolioValClone = Number(portfolioValClone)
                     }
                 }
                 return { ...state, holdings: holdingsClone2, portfolioVal: portfolioValClone }

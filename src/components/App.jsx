@@ -72,7 +72,7 @@ function reducer(state, action) {
                     }
                     let currVal = (Number(currPrice) * Number(holdingsClone2[i].totalAmount))
                     holdingsClone2[i].currVal = Number(currVal);
-
+// eslint-disable-next-line
                     if (holdingsClone2[i].totalAmount > 0 && holdingsClone2[i].totalAmount != "0.000") {
                         portfolioValClone += currVal;
                         let profit = (Number(currVal) - Number(holdingsClone2[i].totalCharged))

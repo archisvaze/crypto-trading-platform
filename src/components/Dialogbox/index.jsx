@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./style.css"
 
 export default function DialogBox(props) {
@@ -10,8 +10,13 @@ export default function DialogBox(props) {
   const [disabled, setdisabled] = useState(true);
   const [buyAmt, setbuyAmt] = useState(0)
 
-  function buying(buyAmt) {
+  useEffect(() => {
     setdisabled(true)
+
+
+  }, [])
+
+  function buying(buyAmt) {
     walletAmt = Number(props.walletAmt);
     let charges = 0;
     setbuyAmt(Number(buyAmt))
@@ -56,16 +61,20 @@ export default function DialogBox(props) {
 
       <button onClick={() => {
         if (chargeAmt > 0) {
-          dispatch({
-            type: "buycoin", payload: {
-              id: data.name,
-              charged: chargeAmt,
-              price: data.currPrice,
-              amount: buyAmt,
-              time: getFormattedDate(),
-              type: "buy"
-            }
-          }); setbuyAmt(0); setchargeAmt(0)
+          dispatch({ type: "update" });
+          setTimeout(() => {
+            dispatch({
+              type: "buycoin", payload: {
+                id: data.name,
+                charged: chargeAmt,
+                price: data.currPrice,
+                amount: buyAmt,
+                time: getFormattedDate(),
+                type: "buy"
+              }
+            }); setbuyAmt(0); setchargeAmt(0)
+          }, 1000)
+
         }
       }} style={{ backgroundColor: disabled ? "grey" : "rgba(0, 216, 0, 0.9)" }} disabled={disabled} className='buy-button'>Buy</button>
 

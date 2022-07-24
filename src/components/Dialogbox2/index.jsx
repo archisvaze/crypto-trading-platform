@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./style.css"
 
 export default function DialogBox2(props) {
@@ -9,6 +9,9 @@ export default function DialogBox2(props) {
     const [disabled, setdisabled] = useState(true);
     let [sellAmt, setsellAmt] = useState(0);
 
+    useEffect(() => {
+        setdisabled(true)
+    }, [])
 
 
     let holdings = props.holdings;
@@ -18,12 +21,10 @@ export default function DialogBox2(props) {
             holdingAmt = Number(obj.totalAmount);
         }
     }
-
     let maxAmt = Number(holdingAmt)
 
 
     function selling(sellAmt) {
-        setdisabled(true)
         let creditAmt = 0;
         setsellAmt(sellAmt)
         if (sellAmt > holdingAmt || sellAmt <= 0) {
@@ -62,16 +63,20 @@ export default function DialogBox2(props) {
             <div className="charge">You will be credited: {creditAmt}</div>
 
             <button onClick={() => {
-                dispatch({
-                    type: "sellcoin", payload: {
-                        id: data.name,
-                        amount: sellAmt,
-                        charged: creditAmt,
-                        price: data.currPrice,
-                        time: getFormattedDate(),
-                        type: "sell"
-                    }
-                }); setsellAmt(0); setcreditAmt(0);
+                dispatch({ type: "update" });
+                setTimeout(() => {
+                    dispatch({
+                        type: "sellcoin", payload: {
+                            id: data.name,
+                            amount: sellAmt,
+                            charged: creditAmt,
+                            price: data.currPrice,
+                            time: getFormattedDate(),
+                            type: "sell"
+                        }
+                    }); setsellAmt(0); setcreditAmt(0);
+                }, 1000)
+
 
             }} style={{ backgroundColor: disabled ? "grey" : "rgba(0, 216, 0, 0.9)" }} disabled={disabled} className='sell-button'>Sell</button>
 

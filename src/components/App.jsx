@@ -16,6 +16,7 @@ function reducer(state, action) {
         case "fetchData":
             console.log(`fetching data from API...`)
             // console.log(action.payload)
+            console.log(state.holdings)
             return { ...state, cryptoArr: action.payload }
 
         case "buy":
@@ -61,9 +62,7 @@ function reducer(state, action) {
         case "update":
             let portfolioValClone = Number(state.portfolioVal);
             let holdingsClone2 = JSON.parse(JSON.stringify(state.holdings))
-
-            if (portfolioValClone > 0) {
-                let holdingsClone2 = JSON.parse(JSON.stringify(state.holdings))
+            if (portfolioValClone >= 0) {
                 for (let i = 0; i < holdingsClone2.length; i++) {
                     let currPrice = 0;
                     for (let obj of state.cryptoArr) {
@@ -75,17 +74,17 @@ function reducer(state, action) {
                     holdingsClone2[i].currVal = Number(currVal);
 
                     if (holdingsClone2[i].totalAmount > 0 && holdingsClone2[i].totalAmount != "0.000") {
-                      
+
                         let profit = (Number(currVal) - Number(holdingsClone2[i].totalCharged))
                         holdingsClone2[i].profit = Number(profit);
                         portfolioValClone = Number(portfolioValClone) + Number(profit);
                         if (portfolioValClone <= 0) portfolioValClone = 0;
                         portfolioValClone = Number(portfolioValClone)
-                        return { ...state, holdings: holdingsClone2, portfolioVal: portfolioValClone }
                     }
                 }
+                return { ...state, holdings: holdingsClone2, portfolioVal: portfolioValClone }
             }
-            else return { ...state, holdings: holdingsClone2, portfolioVal: portfolioValClone }
+            return { ...state, holdings: holdingsClone2, portfolioVal: portfolioValClone }
         default:
             break;
     }
@@ -126,7 +125,10 @@ function App(props) {
             .then(data => {
                 let cryptoArr = data;
                 dispatch({ type: "fetchData", payload: cryptoArr });
-                dispatch({ type: "update" })
+                setTimeout(() => {
+                    dispatch({ type: "update" })
+                }, 1000)
+
             })
     }
     useEffect(() => {

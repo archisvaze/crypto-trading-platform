@@ -30,14 +30,14 @@
     top: 8px;
     right: 8px;
     position: absolute;
-    font-size: 10px;
+    font-size: 15px;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     border: none;
-    height: 15px;
-    width: 15px;
+    height: 20px;
+    width: 40px;
     border-radius: 10px;
     background-color: rgb(255, 51, 51);
 }

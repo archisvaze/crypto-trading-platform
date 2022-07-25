@@ -72,7 +72,7 @@ function reducer(state, action) {
                     }
                     let currVal = (Number(currPrice) * Number(holdingsClone2[i].totalAmount))
                     holdingsClone2[i].currVal = Number(currVal);
-// eslint-disable-next-line
+                    // eslint-disable-next-line
                     if (holdingsClone2[i].totalAmount > 0 && holdingsClone2[i].totalAmount != "0.000") {
                         portfolioValClone += currVal;
                         let profit = (Number(currVal) - Number(holdingsClone2[i].totalCharged))
@@ -150,9 +150,13 @@ function App(props) {
             <div style={{ display: state.showDialogBox2 ? "flex" : " none" }} className="dialogbox2-container">
                 <DialogBox2 dispatch={dispatch} data={state.dialogData} walletAmt={state.walletAmt} portfolioVal={state.portfolioVal} holdings={state.holdings} />
             </div>
+        
             <Header />
             <Wallet walletAmt={state.walletAmt} />
             <Portfolio portfolioVal={state.portfolioVal} />
+           
+           
+
             <div className="crypto-cards-container">
                 {state.cryptoArr.map(obj => {
                     return (

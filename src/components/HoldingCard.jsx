@@ -13,7 +13,7 @@ export default function HoldingCard(props) {
             <div className="hc-1">{id}: {totalAmount}</div>
             <div className="hc-2">Total Paid: ${totalCharged}</div>
             <div className="hc-3">Current Value: ${currVal}</div>
-            <div className="hc-4" style={{ color: profit >= 0 ? "rgba(0, 216, 0)" : "rgba(255, 73, 73)" }}>P/L: ${profit}</div>
+            <div className="hc-4" style={{ color: profit >= 0 ? "#5a8c27" : "rgba(255, 73, 73)" }}>P/L: ${profit}</div>
         </div>
     )
 }

@@ -6,8 +6,8 @@ export default function CryptoCard(props) {
     //declaring variables
     let obj = props.obj;
     let image = obj.image;
-    let currPrice = obj.current_price;
-    let change = obj.price_change_percentage_24h;
+    let currPrice = Number(obj.current_price);
+    let change = Number(obj.price_change_percentage_24h);
     let name = obj.name;
     let dispatch = props.dispatch;
     let payload = {
@@ -26,7 +26,7 @@ export default function CryptoCard(props) {
             </div>
             <div className="actions-container">
                 <button onClick={() => { dispatch({ type: "buy", payload: payload });}} className="buy-button">Buy</button>
-                <button className="sell-button">Sell</button>
+                <button onClick={() => {dispatch({type: "sell", payload: payload})}} className="sell-button">Sell</button>
             </div>
         </div>
     )

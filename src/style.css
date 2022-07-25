@@ -88,7 +88,7 @@ header p {
     letter-spacing: 1px;
 }
 
-.dialogbox-container {
+.dialogbox-container, .dialogbox2-container {
     z-index: 100;
     position: fixed;
     left: 50%;
